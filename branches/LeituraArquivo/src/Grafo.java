@@ -22,7 +22,7 @@ public class Grafo {
 			String linha;
 			
 				while( (linha = br.readLine()) != null){
-					String[] token = linha.split("(:) | (,)");
+					String[] token = linha.split("(:)|(,)");
 					List<Integer> adj = new ArrayList<Integer>();
 					for(int i = 1; i < token.length; i++){
 						adj.add(Integer.parseInt(token[i]));
