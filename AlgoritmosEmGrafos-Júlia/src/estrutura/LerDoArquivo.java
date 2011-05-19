@@ -28,12 +28,12 @@ public class LerDoArquivo{
 	
 				if (linha.contains(",")) {
 					s1.add(linha.split("/"));
-					System.out.println(s1.get(0)[0]);
+					//System.out.println(s1.get(0)[0]);
 	
 					// vertices = s1.get(0)[0].split(",");
 					vertices = s1.get(0)[0].split(",");
 	
-					System.out.println(s1.get(0)[1]);
+					//System.out.println(s1.get(0)[1]);
 	
 					v = new Vertice();
 					List<Vertice> vizinhosAtual = new ArrayList<Vertice>();
@@ -46,7 +46,7 @@ public class LerDoArquivo{
 	
 						for (int i = 1; i < vertices.length; i++) {
 							Vertice vit = new Vertice();
-							System.out.println(vertices[i]);
+							//System.out.println(vertices[i]);
 							// System.out.println("tamanho"+ s1[0].length());
 							vit.setDescricao(vertices[i]);
 							vizinhosAtual.add(vit);
@@ -63,11 +63,11 @@ public class LerDoArquivo{
 	
 					}
 	
-					System.out.println("vertice = " + v.getDescricao());
+					//System.out.println("vertice = " + v.getDescricao());
 					// Teste
 					for (Aresta a : arestasAtual) {
 	
-						System.out.println("peso " + a.getPeso());
+						//System.out.println("peso " + a.getPeso());
 					}
 	
 				}
@@ -81,8 +81,8 @@ public class LerDoArquivo{
 	
 				g.adicionarVertice(v);
 				s1.clear();
-				System.out.println("desgraçado limpo:" + s1.size());
-				System.out.printf("\n");
+				//System.out.println("desgraçado limpo:" + s1.size());
+				//System.out.printf("\n");
 			}
 	
 			// catch do BufferedReader
@@ -96,6 +96,7 @@ public class LerDoArquivo{
 			e.printStackTrace();
 		}
 	
+		System.out.println("Imprimindo a lista de vertices:" + g.getVertices());
 		return g.getVertices();
 	}
 	
@@ -107,7 +108,7 @@ public class LerDoArquivo{
 		int i1=0,i2 = 0;
 		for(int i = 0; i < teste.getVertices().size(); i++){
 			if(teste.getVertices().get(i).getDescricao().equals("v1")) i1 = i;
-			if(teste.getVertices().get(i).getDescricao().equals("v3")) i2 = i;
+			if(teste.getVertices().get(i).getDescricao().equals("v4")) i2 = i;
 		}
 		
 		List<Vertice> resultado = new ArrayList<Vertice>();
