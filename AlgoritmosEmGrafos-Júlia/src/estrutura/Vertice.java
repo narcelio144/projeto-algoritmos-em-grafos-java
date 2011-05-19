@@ -12,13 +12,6 @@ public class Vertice implements Comparable<Vertice>{
         private List<Aresta> arestas = new ArrayList<Aresta>();
         private List<Vertice> vizinhos = new ArrayList<Vertice>();
         
-        
-        public Vertice(String nome){
-                
-                this.descricao = nome;
-                
-        }
-        
         public void setDescricao(String nome){
                 
                 this.descricao = nome;
@@ -60,9 +53,9 @@ public class Vertice implements Comparable<Vertice>{
                 return this.pai;
         }
 
-        public void setVizinho(Vertice vizinho) {
+        public void setVizinhos(List<Vertice> vizinhos) {
                 
-                this.vizinhos.add(vizinho);
+                this.vizinhos.addAll(vizinhos);
                                 
         }
         
@@ -71,9 +64,9 @@ public class Vertice implements Comparable<Vertice>{
                 return this.vizinhos;
         }
         
-        public void setAresta(Aresta novaAresta){
+        public void setArestas(List <Aresta> arestas){
                 
-                this.arestas.add(novaAresta);
+                this.arestas.addAll(arestas);
                 
         }
         
@@ -91,6 +84,25 @@ public class Vertice implements Comparable<Vertice>{
 
                 
         }
+        
+        @Override
+    	public boolean equals(Object obj) {
+    		if(obj instanceof Vertice){
+    			Vertice vRef = (Vertice) obj;
+    			if(this.getDescricao().equals(vRef.getDescricao())) return true;
+    		}
+    		return false;
+    	}
+        
+        @Override
+    	public String toString() {
+    		String s = " ";
+    		s+= this.getDescricao();
+    		return s;
+    	}
+        
+        
+        
         
 }
 
