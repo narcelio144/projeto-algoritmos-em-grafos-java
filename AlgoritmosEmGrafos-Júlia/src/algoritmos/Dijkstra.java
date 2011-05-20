@@ -110,7 +110,9 @@ public class Dijkstra {
 						}
 					}
 					// Cada vizinho, depois de visitado, é adicionado ao corte
-					this.fronteira.add(vizinho);
+					if (!this.fronteira.contains(vizinho)){
+						this.fronteira.add(vizinho);
+					}
 				}
 
 			}
@@ -124,6 +126,7 @@ public class Dijkstra {
 			 */
 
 			Collections.sort(fronteira);
+			System.out.println(fronteira);
 			
 
 		}

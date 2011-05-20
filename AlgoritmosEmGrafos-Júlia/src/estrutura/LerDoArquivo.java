@@ -120,17 +120,15 @@ public class LerDoArquivo{
 		
 		Grafo teste = new Grafo();
 		
-		teste.setVertices(lerGrafo("teste.txt"));
-		int i1=0,i2 = 0;
-		for(int i = 0; i < teste.getVertices().size(); i++){
-			if(teste.getVertices().get(i).getDescricao().equals("v1")) i1 = i;
-			if(teste.getVertices().get(i).getDescricao().equals("v4")) i2 = i;
-		}
-		
+		teste.setVertices(lerGrafo(args[0]));
+		Vertice i1 = new Vertice();
+		Vertice i2 = new Vertice();
+		i1 = teste.encontrarVertice(args[1]);
+		i2 = teste.encontrarVertice(args[2]);		
 		
 		List<Vertice> resultado = new ArrayList<Vertice>();
 		Dijkstra algoritmo = new Dijkstra();
-		resultado = algoritmo.encontrarMenorCaminhoDijkstra(teste, teste.getVertices().get(i1), teste.getVertices().get(i2));
+		resultado = algoritmo.encontrarMenorCaminhoDijkstra(teste, i1, i2);
 	
 		
 			System.out.println("Esse é o menor caminho feito pelo algoritmo:" + resultado);
