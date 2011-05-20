@@ -65,7 +65,9 @@ public class Dijkstra {
 
 			// Toma-se sempre o vértice com menor distância, que é o primeiro da
 			// lista do corte
+			System.out.println("Estava nesse vértice: "+ atual);
 			atual = this.fronteira.get(0);
+			System.out.println("Pegou esse vértice:  "+atual);
 			/*
 			 * Para cada vizinho (cada aresta), calcula-se a sua possível
 			 * distância, somando a distância do vértice atual com a da aresta
@@ -75,17 +77,15 @@ public class Dijkstra {
 			for (int i = 0; i < atual.getArestas().size(); i++) {
 
 				vizinho = atual.getArestas().get(i).getDestino();
-				if (!vizinho.verificarVisita()) {
-
-					vizinho.setPai(atual);
+				System.out.println("Olhando o vizinho de "+ atual + ": "+ vizinho);
+				if (!vizinho.verificarVisita()){
 
 					// Comparando a distância do vizinho com a possível
 					// distância
-					if (vizinho.getDistancia() > (atual.getDistancia() + atual
-							.getArestas().get(i).getPeso())) {
+					if (vizinho.getDistancia() > (atual.getDistancia() + atual.getArestas().get(i).getPeso())) {
 
-						vizinho.setDistancia(atual.getDistancia()
-								+ atual.getArestas().get(i).getPeso());
+						vizinho.setDistancia(atual.getDistancia()+ atual.getArestas().get(i).getPeso());
+						vizinho.setPai(atual);
 
 						/*
 						 * Se o vizinho é o vértice procurado, e foi feita uma
