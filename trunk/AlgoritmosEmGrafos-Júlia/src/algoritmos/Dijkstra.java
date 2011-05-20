@@ -124,6 +124,7 @@ public class Dijkstra {
 			 */
 
 			Collections.sort(fronteira);
+			
 
 		}
 
