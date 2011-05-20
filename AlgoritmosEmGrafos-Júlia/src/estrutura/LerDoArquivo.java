@@ -28,13 +28,8 @@ public class LerDoArquivo{
 	
 				if (linha.contains(",")) {
 					s1.add(linha.split("/"));
-					//System.out.println(s1.get(0)[0]);
-	
-					// vertices = s1.get(0)[0].split(",");
 					vertices = s1.get(0)[0].split(",");
-	
-					//System.out.println(s1.get(0)[1]);
-	
+
 					v = new Vertice();
 					List<Vertice> vizinhosAtual = new ArrayList<Vertice>();
 					List<Aresta> arestasAtual = new ArrayList<Aresta>();
@@ -46,29 +41,21 @@ public class LerDoArquivo{
 	
 						for (int i = 1; i < vertices.length; i++) {
 							Vertice vit = new Vertice();
-							//System.out.println(vertices[i]);
-							// System.out.println("tamanho"+ s1[0].length());
 							vit.setDescricao(vertices[i]);
 							vizinhosAtual.add(vit);
 	
-							v.setVizinhos(vizinhosAtual);
+							
 	
 							Aresta ait = new Aresta(v, vit);
 							ait.setPeso(Integer.parseInt(pesoArestas[i - 1]));
 							arestasAtual.add(ait);
 	
 						}
-	
+						v.setVizinhos(vizinhosAtual);
 						v.setArestas(arestasAtual);
 	
 					}
 	
-					//System.out.println("vertice = " + v.getDescricao());
-					// Teste
-					for (Aresta a : arestasAtual) {
-	
-						//System.out.println("peso " + a.getPeso());
-					}
 	
 				}
 	
@@ -81,8 +68,7 @@ public class LerDoArquivo{
 	
 				g.adicionarVertice(v);
 				s1.clear();
-				//System.out.println("desgraçado limpo:" + s1.size());
-				//System.out.printf("\n");
+
 			}
 	
 			// catch do BufferedReader
@@ -95,8 +81,18 @@ public class LerDoArquivo{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+		System.out.println("Perceba que todos os vizinhos estao no lugar certo:");
 		System.out.println("Imprimindo a lista de vertices:" + g.getVertices());
+		System.out.println("Vizinhos de v1" + g.getVertices().get(0).getVizinhos());
+		System.out.println("Vizinhos de v2" + g.getVertices().get(1).getVizinhos());
+		System.out.println("Vizinhos de v3" + g.getVertices().get(2).getVizinhos());
+		System.out.println("Vizinhos de v4" + g.getVertices().get(3).getVizinhos());
+		System.out.println("Testando os pesos:");
+		System.out.println();
+		System.out.println("Peso da aresta 1: " +g.getVertices().get(0).getArestas().get(0).getPeso());
+		System.out.println("Peso da segunda aresta em 1: " +g.getVertices().get(0).getArestas().get(1).getPeso());
+		System.out.println("Peso da aresta em 2: " +g.getVertices().get(1).getArestas().get(0).getPeso());
+		System.out.println("Peso da aresta 3: " +g.getVertices().get(2).getArestas().get(0).getPeso());
 		return g.getVertices();
 	}
 	
@@ -111,12 +107,13 @@ public class LerDoArquivo{
 			if(teste.getVertices().get(i).getDescricao().equals("v4")) i2 = i;
 		}
 		
+		
 		List<Vertice> resultado = new ArrayList<Vertice>();
 		Dijkstra algoritmo = new Dijkstra();
 		resultado = algoritmo.encontrarMenorCaminhoDijkstra(teste, teste.getVertices().get(i1), teste.getVertices().get(i2));
 	
 		
-			System.out.println(resultado);
+			System.out.println("Esse é o menor caminho feito pelo algoritmo:" + resultado);
 	}
 		
 	
