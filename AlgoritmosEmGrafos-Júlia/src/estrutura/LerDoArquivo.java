@@ -1,14 +1,15 @@
 package estrutura;
 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import algoritmos.Dijkstra;
+
 
 public class LerDoArquivo{
 	
@@ -23,6 +24,9 @@ public class LerDoArquivo{
 		
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(f));
+
+			Map<String,Vertice> mapa = new HashMap<String,Vertice>(); 
+  			
 	
 			while ((linha = br.readLine()) != null) {
 	
@@ -30,19 +34,29 @@ public class LerDoArquivo{
 					s1.add(linha.split("/"));
 					vertices = s1.get(0)[0].split(",");
 
-					v = new Vertice();
+					System.out.println("**** GRAFO ****"+g);
+					v = (Vertice) mapa.get(vertices[0]);
+					System.out.println("Vertice="+vertices[0]+"-"+v);
+					if (v == null) v = new Vertice();
+						
+
 					List<Vertice> vizinhosAtual = new ArrayList<Vertice>();
 					List<Aresta> arestasAtual = new ArrayList<Aresta>();
 					v.setDescricao(vertices[0]);
+					mapa.put(vertices[0], v);
 	
 					if (linha.contains("/")) {
 	
 						String pesoArestas[] = s1.get(0)[1].split(",");
 	
 						for (int i = 1; i < vertices.length; i++) {
-							Vertice vit = new Vertice();
+							Vertice vit;
+					//vit = g.encontrarVertice(vertices[i]);
+					vit =  mapa.get(vertices[i]);
+					if (vit == null) vit = new Vertice();
 							vit.setDescricao(vertices[i]);
 							vizinhosAtual.add(vit);
+							mapa.put(vertices[i], vit);
 	
 							
 	
@@ -61,12 +75,18 @@ public class LerDoArquivo{
 	
 				// Vertices finais
 				else {
-					v = new Vertice();
+
+					//v = g.encontrarVertice(linha);
+					v = (Vertice) mapa.get(linha);
+					System.out.println("Vertice="+linha+"-"+v);
+					if (v == null) v = new Vertice();
 					v.setDescricao(linha);
+					mapa.put(linha, v);
 	
 				}
 	
 				g.adicionarVertice(v);
+				System.out.println("**** GRAFO ****"+g);
 				s1.clear();
 
 			}
