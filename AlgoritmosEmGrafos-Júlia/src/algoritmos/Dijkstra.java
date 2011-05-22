@@ -9,47 +9,36 @@ import estrutura.Grafo;
 
 public class Dijkstra {
 
-	// Atributos usados na função encontrarMenorCaminho
+	// Atributos usados na funcao encontrarMenorCaminho
 
-	// Lista que guarda os vértices pertencentes ao menor caminho encontrado
+	// Lista que guarda os vertices pertencentes ao menor caminho encontrado
 	List<Vertice> menorCaminho = new ArrayList<Vertice>();
 
-	// Variável que recebe os vértices pertencentes ao menor caminho
+	// Variavel que recebe os vertices pertencentes ao menor caminho
 	Vertice verticeCaminho = new Vertice();
 
-	// Variável que guarda o vértice que está sendo visitado
+	// Variavel que guarda o vertice que esta sendo visitado
 	Vertice atual = new Vertice();
 
-	// Variável que marca o vizinho do vértice atualmente visitado
+	// Variavel que marca o vizinho do vertice atualmente visitado
 	Vertice vizinho = new Vertice();
 
-	// Corte de vértices que já tiveram suas distâncias marcadas e cujos
-	// vizinhos não foram visitados
-	List<Vertice> fronteira = new ArrayList<Vertice>();
-
-	// Guarda o número de vértices não visitados
-	int verticesNaoVisitados;
+	// Lista dos vertices que ainda nao foram visitados
+	List<Vertice> naoVisitados = new ArrayList<Vertice>();
 
 	// Algoritmo de Dijkstra
 	public List<Vertice> encontrarMenorCaminhoDijkstra(Grafo grafo, Vertice v1,
 			Vertice v2) {
-
-		// No início, todos os vértices do grafo não foram visitados
-		verticesNaoVisitados = grafo.getVertices().size();
-
-		// O primeiro nó a ser visitado é o da origem do caminho
-		atual = v1;
-		// Adiciona o primeiro nó no corte
-		fronteira.add(atual);
+		
 		// Adiciona a origem na lista do menor caminho
-		menorCaminho.add(atual);
+		menorCaminho.add(v1);
 
 		// Colocando a distancias iniciais
 		for (int i = 0; i < grafo.getVertices().size(); i++) {
 
-			// Nó atual tem distância zero, e todos os outros, 9999(infinita)
+			// Vertice atual tem distancia zero, e todos os outros, 9999("infinita")
 			if (grafo.getVertices().get(i).getDescricao()
-					.equals(atual.getDescricao())) {
+					.equals(v1.getDescricao())) {
 
 				grafo.getVertices().get(i).setDistancia(0);
 
@@ -58,21 +47,25 @@ public class Dijkstra {
 				grafo.getVertices().get(i).setDistancia(9999);
 
 			}
+			//Insere o vertice na lista de vertices nao visitados 
+			this.naoVisitados.add(grafo.getVertices().get(i));
 		}
+		
+		Collections.sort(naoVisitados);
 
-		// O algoritmo continua até que todos os vértices sejam visitados
-		while (verticesNaoVisitados != 0) {
+		// O algoritmo continua ate que todos os vertices sejam visitados
+		while (!this.naoVisitados.isEmpty()) {
 
-			// Toma-se sempre o vértice com menor distância, que é o primeiro da
-			// lista do corte
-			System.out.println("Estava nesse vértice: "+ atual);
-			atual = this.fronteira.get(0);
-			System.out.println("Pegou esse vértice:  "+atual);
+			// Toma-se sempre o vertice com menor distancia, que eh o primeiro da
+			// lista
+			
+			atual = this.naoVisitados.get(0);
+			System.out.println("Pegou esse vertice:  "+atual);
 			/*
-			 * Para cada vizinho (cada aresta), calcula-se a sua possível
-			 * distância, somando a distância do vértice atual com a da aresta
-			 * correspondente. Se essa distância for menor que a distância do
-			 * vizinho, esta é atualizada.
+			 * Para cada vizinho (cada aresta), calcula-se a sua possivel
+			 * distancia, somando a distancia do vertice atual com a da aresta
+			 * correspondente. Se essa distancia for menor que a distancia do
+			 * vizinho, esta eh atualizada.
 			 */
 			for (int i = 0; i < atual.getArestas().size(); i++) {
 
@@ -88,10 +81,10 @@ public class Dijkstra {
 						vizinho.setPai(atual);
 
 						/*
-						 * Se o vizinho é o vértice procurado, e foi feita uma
-						 * mudança na distância, a lista com o menor caminho
-						 * anterior é apagada, pois existe um caminho menor
-						 * vértices pais, até o vértice origem.
+						 * Se o vizinho eh o vertice procurado, e foi feita uma
+						 * mudanca na distancia, a lista com o menor caminho
+						 * anterior eh apagada, pois existe um caminho menor
+						 * vertices pais, ateh o vertice origem.
 						 */
 						if (vizinho == v2) {
 							menorCaminho.clear();
@@ -109,24 +102,19 @@ public class Dijkstra {
 
 						}
 					}
-					// Cada vizinho, depois de visitado, é adicionado ao corte
-					if (!this.fronteira.contains(vizinho)){
-						this.fronteira.add(vizinho);
-					}
 				}
 
 			}
-			// Marca o vértice atual como visitado e o retira do corte
+			// Marca o vertice atual como visitado e o retira da lista de nao visitados
 			atual.visitar();
-			verticesNaoVisitados--;
-			this.fronteira.remove(atual);
+			this.naoVisitados.remove(atual);
 			/*
-			 * Ordena a lista do corte, para que o vértice com menor distância
-			 * fique na primeira posição
+			 * Ordena a lista, para que o vertice com menor distancia
+			 * fique na primeira posicao
 			 */
 
-			Collections.sort(fronteira);
-			System.out.println(fronteira);
+			Collections.sort(naoVisitados);
+			System.out.println(naoVisitados);
 			
 
 		}
