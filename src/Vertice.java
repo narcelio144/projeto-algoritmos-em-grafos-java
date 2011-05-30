@@ -73,7 +73,6 @@ public class Vertice implements Comparable<Vertice>{
                 return arestas;
         }
 
-        @Override
         public int compareTo(Vertice vertice) {
                   if(this.getDistancia() < vertice.getDistancia()) return -1;
           else if(this.getDistancia() == vertice.getDistancia()) return 0;
